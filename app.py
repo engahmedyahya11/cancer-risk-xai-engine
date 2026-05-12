@@ -559,6 +559,6 @@ if __name__ == "__main__":
     demo.launch(
         server_name="0.0.0.0",
         server_port=10000,
-        share=False,      # في 3.x ما كانش بيعمل المشكلة دي
+        share=True,      # أهم سطر
         debug=False,
     )
