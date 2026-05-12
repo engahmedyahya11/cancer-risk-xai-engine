@@ -554,12 +554,23 @@ with gr.Blocks(css=css, theme=gr.themes.Base()) as demo:
     </div>
     """)
 import os
+import gradio as gr
+from fastapi import FastAPI
+from gradio.routes import mount_gradio_app
+
+# الكود بتاعك فوق (RiskModel, explainer, Blocks, demo = gr.Blocks(...))
+# يفضل ما تغيّرش أي حاجة فيه
+
+app = FastAPI()
+
+# نعمل mount للـ Gradio Blocks جوه FastAPI على المسار الرئيسي "/"
+app = mount_gradio_app(app, demo, path="/")
 
 if __name__ == "__main__":
-    demo.launch(
-        server_name="0.0.0.0",
-        server_port=int(os.getenv("PORT", 10000)),
-        share=False,
-        debug=False,
-        show_api=False,
+    import uvicorn
+
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", "10000")),
     )
