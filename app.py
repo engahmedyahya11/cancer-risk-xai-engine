@@ -558,8 +558,7 @@ import os
 if __name__ == "__main__":
     demo.launch(
         server_name="0.0.0.0",
-        server_port=10000,      # بورت ثابت
-        share=True,             # لازم True حسب رسالة Gradio
-        show_api=False,
+        server_port=10000,
+        share=False,      # في 3.x ما كانش بيعمل المشكلة دي
         debug=False,
     )
