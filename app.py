@@ -553,12 +553,23 @@ with gr.Blocks(css=css, theme=gr.themes.Base()) as demo:
       </span>
     </div>
     """)
-import os
+import gradio as gr
+import base64
+from model import RiskModel
+from explainer import SHAPExplainer
+from config import RISK_TIERS, COST_BANDS
+
+print("Training model...")
+risk_model = RiskModel()
+X_train    = risk_model.train()
+explainer  = SHAPExplainer(risk_model.model, X_train)
+print("✅ Ready.")
+
+# ... كل الكود بتاع الـ UI اللي عندك (Blocks, CSS, HTML, analyze, إلخ) ...
+
+with gr.Blocks(css=css, theme=gr.themes.Base()) as demo:
+    # كل تعريفات الواجهة زي ما عندك الآن
+    ...
 
 if __name__ == "__main__":
-    demo.launch(
-        server_name="0.0.0.0",
-        server_port=10000,
-        share=True,      # أهم سطر
-        debug=False,
-    )
+    demo.launch()
